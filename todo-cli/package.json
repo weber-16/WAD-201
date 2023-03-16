@@ -4,11 +4,13 @@
   "description": "",
   "main": "todo.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "prepare": "cd .. && husky install todo-cli/.husky"
   },
   "author": "Nehath <nehathvarma@gmail.com>",
   "license": "ISC",
   "devDependencies": {
+    "husky": "^8.0.3",
     "jest": "^29.5.0"
   }
 }
