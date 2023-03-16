@@ -1,4 +1,5 @@
 const todoList = () => {
+  var today = new Date()
   all = [];
   const add = (todoItem) => {
     all.push(todoItem);
