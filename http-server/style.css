@@ -1,0 +1,116 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  body {
+    background-color: hsl(180, 52%, 63%)
+  }
+  
+  .heading1 {
+    color: azure;
+    margin-top: 1rem;
+    font-family: serif;
+    font-size: 50px;
+    font-weight: 1500;
+  }
+  
+  .subheading1 {
+    color: azure;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-style:italic;
+  }
+  
+  .label3 {
+    color: azure;
+  }
+  
+  .actual {
+    background-color:  hsl(180, 52%, 63%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3rem;
+  }
+  
+  .form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(26, 67, 67);
+    width: 600px;
+    height: 500px;
+    box-shadow: 2px 4px 10px gray;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 15px;
+  }
+  
+  .input {
+    color: rgb(67, 70, 70);
+    padding: 10px 10px;
+    border: 3px solid rgb(34, 33, 33);
+    font-size: 15px;
+    border-radius: 20px;
+    background-color: rgb(165, 165, 165);
+  }
+  
+  label {
+    font-size: 18px;
+    letter-spacing: 1.4px;
+  }
+  
+  .tablemargin {
+    background-color: rgb(82, 89, 89);
+    margin-top: 2px;
+  }
+  
+  .abs {
+    background-color: rgb(102, 180, 248);
+    color: white;
+    padding: 10px 20px;
+    font-size: large;
+    font-weight: 600;
+    border-radius: 10px;
+  }
+  
+  input:invalid:focus {
+    border: 2px solid red;
+  }
+  
+  .table {
+    background-color: rgba(91, 95, 95, 0.5);
+    border: 2px solid black;
+    margin: 40px auto;
+  }
+  
+  .table {
+    border-radius: 10px;
+    border-width: 4px;
+  
+  }
+  
+  .td {
+    border-radius: 5px;
+    border-width: 2px;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .th {
+    border-radius: 5px;
+    border-width: 2px;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .subheading2 {
+    text-decoration: underline solid;
+    font-weight: bold;
+    color: azure;
+    text-align: center;
+    margin-top: 2rem;
+  }
+  
