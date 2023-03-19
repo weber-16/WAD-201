@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Todo extends Model {
     /**
@@ -10,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static async addTask(params) {
-      return  await Todo.create(params);
+      return await Todo.create(params);
     }
     static associate(models) {
       // define association here
@@ -39,64 +37,71 @@ module.exports = (sequelize, DataTypes) => {
     static async overdue() {
       // FILL IN HERE TO RETURN OVERDUE ITEMS
       return Todo.findAll({
-        where:{
-          duedate:{
-            [Op.lt]: new Date(), competed: false
+        where: {
+          duedate: {
+            [Op.lt]: new Date(),
+            competed: false,
           },
         },
-        order: [["id","ASC"]],
+        order: [["id", "ASC"]],
       });
     }
 
     static async dueToday() {
       // FILL IN HERE TO RETURN ITEMS DUE tODAY
       return Todo.findAll({
-        where:{
-          duedate:{
-            [Op.eq]: new Date(), competed: false
+        where: {
+          duedate: {
+            [Op.eq]: new Date(),
+            competed: false,
           },
         },
-        order: [["id","ASC"]],
+        order: [["id", "ASC"]],
       });
     }
 
     static async dueLater() {
       // FILL IN HERE TO RETURN ITEMS DUE LATER
       return Todo.findAll({
-        where:{
-          duedate:{
-            [Op.gt]: new Date(), competed: false
+        where: {
+          duedate: {
+            [Op.gt]: new Date(),
+            competed: false,
           },
         },
-        order: [["id","ASC"]],
+        order: [["id", "ASC"]],
       });
     }
 
     static async markAsComplete(id) {
       // FILL IN HERE TO MARK AN ITEM AS COMPLETE
       return Todo.update(
-        {completed : true},
+        { completed: true },
         {
-          where:{
+          where: {
             id,
           },
         }
       );
-   }
+    }
     displayableString() {
       let check = this.completed ? "[x]" : "[ ]";
-      let date = this.dueDate === new Date().toISOString("en-CA") ? "" :this.dueDate;
+      let date =
+        this.dueDate === new Date().toISOString("en-CA") ? "" : this.dueDate;
 
       return `${this.id}. ${check} ${this.title} ${date}`.trim;
     }
   }
-  Todo.init({
-    title: DataTypes.STRING,
-    dueDate: DataTypes.DATEONLY,
-    completed: DataTypes.BOOLEAN
-  }, {
-    sequelize,
-    modelName: 'Todo',
-  });
+  Todo.init(
+    {
+      title: DataTypes.STRING,
+      dueDate: DataTypes.DATEONLY,
+      completed: DataTypes.BOOLEAN,
+    },
+    {
+      sequelize,
+      modelName: "Todo",
+    }
+  );
   return Todo;
 };
