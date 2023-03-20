@@ -1,5 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
+const {Op} = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Todo extends Model {
     /**
@@ -8,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static async addTask(params) {
-      return await Todo.create(params);
+      return await this.create(params);
     }
     static associate(models) {
       // define association here
@@ -126,11 +127,11 @@ module.exports = (sequelize, DataTypes) => {
       return status;
     }
     displayableString() {
-      let check = this.completed ? "[x]" : "[ ]";
-      let date =
-        this.dueDate === new Date().toISOString("en-CA") ? "" : this.dueDate;
+      var check = this.completed ? "[x]" : "[ ]";
+      var today =new Date().toISOString().slice(0,10);
+      return  '${this.id}. ${check} ${this.title} ${this.dueDate === today ? "" : this.dueDate}' .trim();
 
-      return `${this.id}. ${check} ${this.title} ${date}`.trim;
+      
     }
   }
   Todo.init(

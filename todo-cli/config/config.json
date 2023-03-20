@@ -4,6 +4,7 @@
     "password": "weber16",
     "database": "todo_db_dev",
     "host": "127.0.0.1",
+    "logging": false,
     "dialect": "postgres"
   },
   "test": {
@@ -11,6 +12,7 @@
     "password": "weber16",
     "database": "todo_db_test",
     "host": "127.0.0.1",
+    "logging": false,
     "dialect": "postgres"
   },
   "production": {
@@ -18,6 +20,7 @@
     "password": "weber16",
     "database": "todo_db_prod",
     "host": "127.0.0.1",
+    "logging": false,
     "dialect": "postgres"
   }
 }
