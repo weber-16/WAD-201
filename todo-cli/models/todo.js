@@ -18,71 +18,112 @@ module.exports = (sequelize, DataTypes) => {
 
       console.log("Overdue");
       // FILL IN HERE
-      const overdue = await Todo.overdue();
+      const overdue = await this.overdue();
       console.log(overdue.map((item) => item.displayableString()).join("\n"));
       console.log("\n");
 
       console.log("Due Today");
       // FILL IN HERE
-      const dueToday = await Todo.dueToday();
+      const dueToday = await this.dueToday();
       console.log(dueToday.map((item) => item.displayableString()).join("\n"));
       console.log("\n");
 
       console.log("Due Later");
-      const laterdue = await Todo.dueLater();
+      const laterdue = await this.dueLater();
       console.log(laterdue.map((item) => item.displayableString()).join("\n"));
       // FILL IN HERE
     }
 
     static async overdue() {
       // FILL IN HERE TO RETURN OVERDUE ITEMS
-      return Todo.findAll({
-        where: {
-          duedate: {
-            [Op.lt]: new Date(),
-            competed: false,
+      // return Todo.findAll({
+      //   where: {
+      //     duedate: {
+      //       [Op.lt]: new Date(),
+      //       competed: false,
+      //     },
+      //   },
+      //   order: [["id", "ASC"]],
+      // });
+      try{
+        const todo = await Todo.findAll({
+          where : {
+            dueDate:{
+              [Op.lt]: new Date(),
+            },
           },
-        },
-        order: [["id", "ASC"]],
-      });
+          order : [["id","ASC"]],
+        });
+        return todo;
+      }catch (error) {
+        console.error(error);
+      }
     }
 
     static async dueToday() {
       // FILL IN HERE TO RETURN ITEMS DUE tODAY
-      return Todo.findAll({
-        where: {
-          duedate: {
-            [Op.eq]: new Date(),
-            competed: false,
+      // return Todo.findAll({
+      //   where: {
+      //     duedate: {
+      //       [Op.eq]: new Date(),
+      //       competed: false,
+      //     },
+      //   },
+      //   order: [["id", "ASC"]],
+      // });
+      try{
+        const todo = await Todo.findAll({
+          where : {
+            dueDate:{
+              [Op.eq]: new Date(),
+            },
           },
-        },
-        order: [["id", "ASC"]],
-      });
+          order : [["id","ASC"]],
+        });
+        return todo;
+      }catch (error) {
+        console.error(error);
+      }
     }
 
     static async dueLater() {
       // FILL IN HERE TO RETURN ITEMS DUE LATER
-      return Todo.findAll({
-        where: {
-          duedate: {
-            [Op.gt]: new Date(),
-            competed: false,
+      // return Todo.findAll({
+      //   where: {
+      //     duedate: {
+      //       [Op.gt]: new Date(),
+      //       competed: false,
+      //     },
+      //   },
+      //   order: [["id", "ASC"]],
+      // });
+      try{
+        const todo = await Todo.findAll({
+          where : {
+            dueDate:{
+              [Op.gt]: new Date(),
+            },
           },
-        },
-        order: [["id", "ASC"]],
-      });
+          order : [["id","ASC"]],
+        });
+        return todo;
+      }catch (error) {
+        console.error(error);
+      }
     }
 
     static async markAsComplete(id) {
       // FILL IN HERE TO MARK AN ITEM AS COMPLETE
-      return Todo.update(
+      const status =await Todo.update(
+      
         { completed: true },
         {
           where: {
-            id,
+            id: id,
           },
         }
       );
+      return status;
     }
     displayableString() {
       let check = this.completed ? "[x]" : "[ ]";
