@@ -117,7 +117,7 @@ module.exports = (sequelize, DataTypes) => {
       // FILL IN HERE TO MARK AN ITEM AS COMPLETE
       const status =await Todo.update(
       
-        { completed: true },
+        { completed: false },
         {
           where: {
             id: id,
