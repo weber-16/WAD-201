@@ -6,10 +6,10 @@ module.exports = (sequelize, DataTypes) => {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
+     * The models/index file will call this method automatically.
      */
     static async addTask(params) {
-      return await this.create(params);
+      return await Todo.create(params);
     }
     static associate(models) {
       // define association here
@@ -129,7 +129,7 @@ module.exports = (sequelize, DataTypes) => {
     displayableString() {
       var check = this.completed ? "[x]" : "[ ]";
       var today =new Date().toISOString().slice(0,10);
-      return  '${this.id}. ${check} ${this.title} ${this.dueDate === today ? "" : this.dueDate}' .trim();
+      return  `${this.id}. ${check} ${this.title} ${this.dueDate === today ? "" : this.dueDate}`.trim();
 
       
     }
