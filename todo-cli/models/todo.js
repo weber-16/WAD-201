@@ -51,6 +51,7 @@ module.exports = (sequelize, DataTypes) => {
           where : {
             dueDate:{
               [Op.lt]: new Date(),
+              // completed:false // changed
             },
           },
           order : [["id","ASC"]],
@@ -117,7 +118,7 @@ module.exports = (sequelize, DataTypes) => {
       // FILL IN HERE TO MARK AN ITEM AS COMPLETE
       const status =await Todo.update(
       
-        { completed: false },
+        { completed: true },
         {
           where: {
             id: id,
@@ -127,9 +128,8 @@ module.exports = (sequelize, DataTypes) => {
       return status;
     }
     displayableString() {
-      var check = this.completed ? "[x]" : "[ ]";
       var today =new Date().toISOString().slice(0,10);
-      return  `${this.id}. ${check} ${this.title} ${this.dueDate === today ? "" : this.dueDate}`.trim();
+      return  `${this.id}. ${this.completed ? "[x]" : "[ ]"} ${this.title} ${this.dueDate === today ? "" : this.dueDate}`.trim();
 
       
     }
