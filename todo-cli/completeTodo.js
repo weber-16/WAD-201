@@ -20,3 +20,4 @@ const markAsComplete = async (id) => {
   await markAsComplete(id);
   await db.Todo.showList();
 })();
+

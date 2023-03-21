@@ -6,6 +6,7 @@ const todoList = require("../todo");
 const { all, markAsComplete, add, dueToday, dueLater, overdue } = todoList();
 
 describe("TodoList Test Suite", () => {
+  
   test("New todo added", () => {
     const todoItemsCount = all.length;
     expect(all.length).toBe(todoItemsCount);
@@ -62,6 +63,8 @@ describe("TodoList Test Suite", () => {
 });
 */
 
+
+
 const db = require("../models");
 
 describe("Todolist Test Suite", () => {
@@ -80,3 +83,4 @@ describe("Todolist Test Suite", () => {
     expect(newTodoItemsCount).toBe(todoItemsCount + 1);
   });
 });
+
