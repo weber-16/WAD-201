@@ -1,0 +1,25 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "weber",
+    "database": "wd-todo-dev",
+    "host": "127.0.0.1",
+    "logging": false,
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "weber",
+    "database": "wd-todo-test",
+    "host": "127.0.0.1",
+    "logging": false,
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "postgres",
+    "password": "weber",
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
