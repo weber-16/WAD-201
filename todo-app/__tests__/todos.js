@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* eslint-disable  no-unused-vars */
 const request = require("supertest");
 
 const db = require("../models/index");
@@ -88,3 +88,5 @@ describe("Todo Application", function () {
     expect(p_Del_Response).toBe(true);
   });
 });
+
+/* eslint-disable  no-unused-vars */

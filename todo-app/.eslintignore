@@ -1,5 +1,5 @@
 migrations
 models
 app.js
-todos.js
-todo.js 
+index.js 
+package.json
