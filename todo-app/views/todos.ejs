@@ -1,4 +1,4 @@
-<table border="1">
+<!--<table border="1">
   <tr>
     <th>ID</th>
     <th>Title</th>
@@ -13,4 +13,223 @@
     <td><%= allTodos[i].completed%></td>
   </tr>
   <% } %>
-</table>
+</table> -->
+
+<div>
+  <div class="flex items-center">
+    <h5>Overdue</h5>
+    <div class="bg-gray-300 rounded ml-2 px-3 text-sm">
+      <p id="count-overdue">2</p>
+    </div>
+  </div>
+  <ul class="list-none">
+    <li class="Todo-Item">
+      <div
+        class="flex items-center w-fit my-2 px-2 py-1 hover:bg-purple-50 rounded"
+      >
+        <input
+          id="todo-checkbox-1"
+          type="checkbox"
+          class="w-4 h-4 text-blue-600 bg-gray-500 rounded border"
+        />
+        <label
+          for="todo-checkbox-1"
+          class="ml-2 text-md text-gray-600 cursor-pointer"
+          >Have to pay electricity bill</label
+        >
+        <a href="#" class="hidden trash-icon ml-2"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m6 4.125l2.25 2.25m0 0l2.25 2.25M12 13.875l2.25-2.25M12 13.875l-2.25 2.25M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
+            />
+          </svg>
+        </a>
+      </div>
+    </li>
+    <li class="Todo-Item">
+      <div
+        class="flex items-center w-fit my-2 px-2 py-1 hover:bg-purple-50 rounded"
+      >
+        <input
+          id="todo-checkbox-2"
+          type="checkbox"
+          class="w-4 h-4 text-blue-600 bg-gray-500 rounded border"
+        />
+        <label
+          for="todo-checkbox-2"
+          class="ml-2 text-md text-gray-600 cursor-pointer"
+          >Recharge mobile</label
+        >
+        <a href="#" class="hidden trash-icon ml-2"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m6 4.125l2.25 2.25m0 0l2.25 2.25M12 13.875l2.25-2.25M12 13.875l-2.25 2.25M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
+            />
+          </svg>
+        </a>
+      </div>
+    </li>
+  </ul>
+  <div class="flex items-center">
+    <h5>Due Today</h5>
+    <div class="bg-gray-300 rounded ml-2 px-3 text-sm">
+      <p id="count-due-today">2</p>
+    </div>
+  </div>
+  <ul class="list-none">
+    <li class="Todo-Item">
+      <div
+        class="flex items-center w-fit my-2 px-2 py-1 hover:bg-purple-50 rounded"
+      >
+        <input
+          id="todo-checkbox-3"
+          type="checkbox"
+          class="w-4 h-4 text-blue-600 bg-gray-500 rounded border"
+        />
+        <label
+          for="todo-checkbox-3"
+          class="ml-2 text-md text-gray-600 cursor-pointer"
+          >Have to go Gym</label
+        >
+        <a href="#" class="hidden trash-icon ml-2"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m6 4.125l2.25 2.25m0 0l2.25 2.25M12 13.875l2.25-2.25M12 13.875l-2.25 2.25M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
+            />
+          </svg>
+        </a>
+      </div>
+    </li>
+    <li class="Todo-Item">
+      <div
+        class="flex items-center w-fit my-2 px-2 py-1 hover:bg-purple-50 rounded"
+      >
+        <input
+          id="todo-checkbox-4"
+          type="checkbox"
+          class="w-4 h-4 text-blue-600 bg-gray-500 rounded border"
+        />
+        <label
+          for="todo-checkbox-4"
+          class="ml-2 text-md text-gray-600 cursor-pointer"
+          >Need to complete l8</label
+        >
+        <a href="#" class="hidden trash-icon ml-2"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m6 4.125l2.25 2.25m0 0l2.25 2.25M12 13.875l2.25-2.25M12 13.875l-2.25 2.25M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
+            />
+          </svg>
+        </a>
+      </div>
+    </li>
+  </ul>
+  <div class="flex items-center">
+    <h5>Due Later</h5>
+    <div class="bg-gray-300 rounded ml-2 px-3 text-sm">
+      <p id="count-due-later">2</p>
+    </div>
+  </div>
+  <ul class="list-none">
+    <li class="Todo-Item">
+      <div
+        class="flex items-center w-fit my-2 px-2 py-1 hover:bg-purple-50 rounded"
+      >
+        <input
+          id="todo-checkbox-5"
+          type="checkbox"
+          class="w-4 h-4 text-blue-600 bg-gray-500 rounded border"
+        />
+        <label
+          for="todo-checkbox-5"
+          class="ml-2 text-md text-gray-600 cursor-pointer"
+          >complete level9</label
+        >
+        <a href="#" class="hidden trash-icon ml-2"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m6 4.125l2.25 2.25m0 0l2.25 2.25M12 13.875l2.25-2.25M12 13.875l-2.25 2.25M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
+            />
+          </svg>
+        </a>
+      </div>
+    </li>
+    <li class="Todo-Item">
+      <div
+        class="flex items-center w-fit my-2 px-2 py-1 hover:bg-purple-50 rounded"
+      >
+        <input
+          id="todo-checkbox-6"
+          type="checkbox"
+          class="w-4 h-4 text-blue-600 bg-gray-500 rounded border"
+        />
+        <label
+          for="todo-checkbox-6"
+          class="ml-2 text-md text-gray-600 cursor-pointer"
+          >Service center</label
+        >
+        <a href="#" class="hidden trash-icon ml-2"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m6 4.125l2.25 2.25m0 0l2.25 2.25M12 13.875l2.25-2.25M12 13.875l-2.25 2.25M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
+            />
+          </svg>
+        </a>
+      </div>
+    </li>
+  </ul>
+</div>
