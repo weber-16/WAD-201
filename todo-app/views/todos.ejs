@@ -1,28 +1,15 @@
-<!--<table border="1">
-  <tr>
-    <th>ID</th>
-    <th>Title</th>
-    <th>Due Date</th>
-    <th>Is Completed?</th>
-  </tr>
-  <% for( var i = 0;i< allTodos.length;i++){ %>
-  <tr>
-    <td><%= allTodos[i].id %></td>
-    <td><%= allTodos[i].title %></td>
-    <td><%= allTodos[i].dueDate %></td>
-    <td><%= allTodos[i].completed%></td>
-  </tr>
-  <% } %>
-</table> -->
-
 <div>
   <div class="flex items-center">
     <h5>Overdue</h5>
     <div class="bg-gray-300 rounded ml-2 px-3 text-sm">
-      <p id="count-overdue">2</p>
+      <span id="count-overdue"><%= overdue.length %>
+        <!-- <% for( var i = 0;i< allTodos.length;i++){ %>
+          <% } %>  -->
+      </span>
     </div>
   </div>
   <ul class="list-none">
+    <% for( var i = 0;i< overdue.length;i++){ %>
     <li class="Todo-Item">
       <div
         class="flex items-center w-fit my-2 px-2 py-1 hover:bg-purple-50 rounded"
@@ -35,7 +22,7 @@
         <label
           for="todo-checkbox-1"
           class="ml-2 text-md text-gray-600 cursor-pointer"
-          >Have to pay electricity bill</label
+          ><%= overdue[i].title %></label
         >
         <a href="#" class="hidden trash-icon ml-2"
           ><svg
@@ -55,7 +42,8 @@
         </a>
       </div>
     </li>
-    <li class="Todo-Item">
+    <% } %>
+    <!-- <li class="Todo-Item">
       <div
         class="flex items-center w-fit my-2 px-2 py-1 hover:bg-purple-50 rounded"
       >
@@ -86,15 +74,19 @@
           </svg>
         </a>
       </div>
-    </li>
+    </li> -->
   </ul>
+
+        <!-- upto this overdue -->
   <div class="flex items-center">
     <h5>Due Today</h5>
     <div class="bg-gray-300 rounded ml-2 px-3 text-sm">
-      <p id="count-due-today">2</p>
+      <span id="count-overdue"><%= duetoday.length %>
+      </span>
     </div>
   </div>
   <ul class="list-none">
+    <% for( var i = 0;i< duetoday.length;i++){ %>
     <li class="Todo-Item">
       <div
         class="flex items-center w-fit my-2 px-2 py-1 hover:bg-purple-50 rounded"
@@ -107,7 +99,7 @@
         <label
           for="todo-checkbox-3"
           class="ml-2 text-md text-gray-600 cursor-pointer"
-          >Have to go Gym</label
+          ><%= duetoday[i].title %></label
         >
         <a href="#" class="hidden trash-icon ml-2"
           ><svg
@@ -127,7 +119,8 @@
         </a>
       </div>
     </li>
-    <li class="Todo-Item">
+    <% } %>
+    <!-- <li class="Todo-Item">
       <div
         class="flex items-center w-fit my-2 px-2 py-1 hover:bg-purple-50 rounded"
       >
@@ -158,15 +151,18 @@
           </svg>
         </a>
       </div>
-    </li>
+    </li> -->
   </ul>
   <div class="flex items-center">
+    <!-- upto this dueToday -->
     <h5>Due Later</h5>
     <div class="bg-gray-300 rounded ml-2 px-3 text-sm">
-      <p id="count-due-later">2</p>
+      <span id="count-overdue"><%= duelater.length %>
+      </span>
     </div>
   </div>
   <ul class="list-none">
+    <% for( var i = 0;i< duelater.length;i++){ %>
     <li class="Todo-Item">
       <div
         class="flex items-center w-fit my-2 px-2 py-1 hover:bg-purple-50 rounded"
@@ -179,7 +175,7 @@
         <label
           for="todo-checkbox-5"
           class="ml-2 text-md text-gray-600 cursor-pointer"
-          >complete level9</label
+          ><%= duelater[i].title %></label
         >
         <a href="#" class="hidden trash-icon ml-2"
           ><svg
@@ -199,7 +195,7 @@
         </a>
       </div>
     </li>
-    <li class="Todo-Item">
+    <!-- <li class="Todo-Item">
       <div
         class="flex items-center w-fit my-2 px-2 py-1 hover:bg-purple-50 rounded"
       >
@@ -230,6 +226,7 @@
           </svg>
         </a>
       </div>
-    </li>
+    </li> -->
   </ul>
+  <% } %>
 </div>
