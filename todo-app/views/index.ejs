@@ -7,6 +7,18 @@
     <link rel="stylesheet" href="./css/styles.css" />
     <title>My Todo-application</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      function updateTodo(id) {
+        fetch(`/todos/${id}/markAsCompleted`, {
+          method: "put",
+          headers: { "Content-Type": "application/json" },
+        })
+          .then((res) => {
+            window.location.reload();
+          })
+          .catch((err) => console.error(err));
+      }
+    </script>
   </head>
   <body>
     <div class="grid grid-col-6">
@@ -44,7 +56,10 @@
     </div>
     <div class="grid grid-col-6">
       <div class="col-start-2 col-span-1">
-        <%- include('todos.ejs') %>
+        <%- include('todos.ejs', {todosList: overdue, typeID: "overdue",
+        type: "Overdue"}) %> <%- include('todos.ejs', {todosList: duetoday,
+        typeID: "today", type: "Due Today"}) %> <%- include('todos.ejs',
+        {todosList: duelater, typeID: "later", type: "Due Later"}) %>
       </div>
     </div>
   </body>

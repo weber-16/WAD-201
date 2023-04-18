@@ -19,12 +19,12 @@ module.exports = (sequelize, DataTypes) => {
       return this.findAll();
     }
 
-    static overdue() {
+    static async overdue() {
      return this.findAll({
           where : {
             dueDate:{
-              [Op.lt]: new Date().toISOString("en-CA"),
-              completed:false // changed
+              [Op.lt]: new Date(),
+              //completed:false // changed
             },
           },
           order : [["id","ASC"]],
@@ -32,12 +32,12 @@ module.exports = (sequelize, DataTypes) => {
         
     }
 
-    static dueToday() {
+    static async dueToday() {
       return this.findAll({
            where : {
              dueDate:{
-               [Op.eq]: new Date().toISOString("en-CA"),
-               completed:false // changed
+               [Op.eq]: new Date(),
+               //completed:false // changed
              },
            },
            order : [["id","ASC"]],
@@ -45,12 +45,12 @@ module.exports = (sequelize, DataTypes) => {
          
      }
 
-     static dueLater() {
+     static async dueLater() {
       return this.findAll({
            where : {
              dueDate:{
-               [Op.gt]: new Date().toISOString("en-CA"),
-               completed:false // changed
+               [Op.gt]: new Date(),
+               //completed:false // changed
              },
            },
            order : [["id","ASC"]],
