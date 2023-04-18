@@ -8,7 +8,7 @@
     </div>
   </div>
   <ul class="list-none">
-    <% for(var i=0;i<todosList.length;i++) { %> <%- include('listItems.ejs',
+    <% for(var i=0;i<todosList.length;i++) { %> <%- include('listitems.ejs',
     {id: todosList[i].id, completionStatus: todosList[i].completed, title:
     todosList[i].title}) %> <% } %>
   </ul>

@@ -59,7 +59,7 @@ module.exports = (sequelize, DataTypes) => {
      }
 
     markAsCompleted() {
-      return this.update({ completed: !this.completed });
+      return this.update({ completed: this.completed });
     }
 
     // deleteTodo() {

@@ -4,17 +4,24 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="<%= csrfToken %>" />
     <link rel="stylesheet" href="./css/styles.css" />
     <title>My Todo-application</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
+      var token = document
+        .querySelector('meta[name="csrf-token"]')
+        .getAttribute("content");
       function updateTodo(id) {
         fetch(`/todos/${id}/markAsCompleted`, {
           method: "put",
           headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            _csrf: token,
+          }),
         })
           .then((res) => {
-            window.location.reload();
+            if (res.ok) window.location.reload();
           })
           .catch((err) => console.error(err));
       }
@@ -22,6 +29,9 @@
         fetch(`/todos/${id}`, {
           method: "delete",
           headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            _csrf: token,
+          }),
         })
           .then((res) => {
             if (res.ok) window.location.reload();
@@ -35,6 +45,7 @@
       <div class="col-start-3 col-span-2">
         <%- include('header.ejs') %>
         <form action="/todos" method="post">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
           <div class="flex gap-2 py-4">
             <div class="flex-none">
               <input
@@ -66,10 +77,10 @@
     </div>
     <div class="grid grid-col-6">
       <div class="col-start-2 col-span-1">
-        <%- include('todos.ejs', {todosList: overdue, typeID: "overdue",
-        type: "Overdue"}) %> <%- include('todos.ejs', {todosList: duetoday,
-        typeID: "today", type: "Due Today"}) %> <%- include('todos.ejs',
-        {todosList: duelater, typeID: "later", type: "Due Later"}) %>
+        <%- include('todos.ejs', {todosList: overdue, typeID: "overdue", type:
+        "Overdue"}) %> <%- include('todos.ejs', {todosList: duetoday, typeID:
+        "today", type: "Due Today"}) %> <%- include('todos.ejs', {todosList:
+        duelater, typeID: "later", type: "Due Later"}) %>
       </div>
     </div>
   </body>
