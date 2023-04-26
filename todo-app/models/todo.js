@@ -19,13 +19,14 @@ module.exports = (sequelize, DataTypes) => {
       return this.findAll();
     }
     
-    static async overDue() {
+    static async overDue(userId) {
       try{
         return this.findAll({
           where: {
             dueDate: {
               [Op.lt]: new Date(),
             },
+            userId,
             completed: false,
           },
           order: [['id', 'ASC']], 
@@ -35,13 +36,14 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
 
-    static async dueToday() {
+    static async dueToday(userId) {
       try{
         return this.findAll({
           where: {
             dueDate:{
             [Op.eq]: new Date(),
           },
+          userId,
           completed: false,
         },
         order: [['id', 'ASC']],
@@ -51,13 +53,14 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
 
-    static async dueLater() {
+    static async dueLater(userId) {
       try{
         return this.findAll({
           where: {
             dueDate: {
               [Op.gt]: new Date(),
             },
+            userId,
             completed: false,
           },
           order: [['id', 'ASC']],
@@ -67,11 +70,12 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
 
-    static async completed(){
+    static async completed(userId){
       try{
         return this.findAll({
           where: {
             completed: true,
+            userId
           },
         })
       }catch(error){
@@ -83,12 +87,12 @@ module.exports = (sequelize, DataTypes) => {
       return this.update({ completed: bool });
     }
 
-    static async remove(id){
-      return this.destroy({where: {id: id}})
+    static async remove(id, userId){
+      return this.destroy({where: {id: id, userId}})
     }
 
-    static addTodo({title, dueDate}){
-      return this.create({title: title, dueDate: dueDate, completed: false});
+    static addTodo({title, dueDate, userId}){
+      return this.create({title: title, dueDate: dueDate, completed: false, userId});
     }
     
     markAsCompleted() {
