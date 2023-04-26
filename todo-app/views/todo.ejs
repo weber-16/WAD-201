@@ -50,7 +50,7 @@
                 name="title"
                 class="border border-gray-600 text-sm text-gray-900 font-semibold w-full rounded p-2"
                 placeholder="What's Next?"
-                required
+                
               />
             </div>
             <div class="flex-auto">
@@ -58,7 +58,7 @@
                 type="date"
                 name="dueDate"
                 placeholder="dd/mm/yyyy"
-                required
+                
                 class="border border-gray-600 text-xs text-gray-900 font-semibold w-full rounded p-2 h-full"
               />
             </div>
@@ -78,6 +78,11 @@
         duelater, typeID: "later", type: "Due Later"}) %> <%-
         include('todos.ejs', {todosList: completeditems, typeID: "completed",
         type: "Completed Items"}) %>
+        <% if(messages && messages.error && messages.error.length > 0)  { %>
+          <% for(var i=0; i<messages.error.length; i++) { %>
+                  <%- include('notifications.ejs', {error: messages.error[i]})%>
+          <% } %>
+        <% } %>
       </div>
     </div>
   </body>

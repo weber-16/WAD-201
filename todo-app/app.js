@@ -411,20 +411,26 @@ app.get("/todos/:id", async function (request, response) {
 app.post(
   "/todos",
   connectEnsureLogin.ensureLoggedIn(),
-  async function (request, response) {
-    try {
-      await Todo.addTodo({
-        title: request.body.title,
-        dueDate: request.body.dueDate,
-        userId: request.user.id,
-      });
-      request.flash("success", "Added todo successfully");
-      return response.redirect("/todo");
-    } catch (error) {
-      console.log(error);
-      request.flash("error", "title min len=5, date is required");
-      return response.redirect("/todo");
-      // return response.status(422).json(error);
+  async (request, response) => {
+    const title = request.body.title;
+    const dueDate = request.body.dueDate;
+
+    if (title.length == 0 || dueDate.length != 10) {
+      request.flash("error", `Please fill in the proper details`);
+      response.redirect("/todo");
+    } else {
+      try {
+        const todo = await Todo.addTodo({
+          title: title,
+          dueDate: dueDate,
+          userId: request.user.id,
+        });
+
+        return response.redirect("/todo");
+      } catch (error) {
+        console.log(error);
+        return response.status(422).json(error); //unprocessable entity
+      }
     }
   }
 );
@@ -470,11 +476,7 @@ app.get("/signup", (request, response) => {
 });
 
 app.post("/users", async (request, response) => {
-  // if(request.body.password===""){
-  //   request.flash("error", "password required");
-  //   response.redirect("/signup")
-  // }
-  const hashedPwd = await bcrypt.hash(request.body.password, saltRounds);
+  /*const hashedPwd = await bcrypt.hash(request.body.password, saltRounds);
   console.log(hashedPwd);
 
   try {
@@ -494,13 +496,36 @@ app.post("/users", async (request, response) => {
     error.errors.forEach((element) => {
       const msg = element.message;
       request.flash("error", msg);
-      // if(msg==='Validation len on firstName failed'){request.flash("error","Fist Name required")}
-      // if(msg==='Validation len on email failed'){request.flash("error","Email required")}
-      // if(msg==='email must be unique'){request.flash("error","Email Already Existing")}
     });
 
     response.redirect("/todo");    ///////
     console.log(error);
+  }*/const firstName = request.body.firstName;
+  const email = request.body.email;
+  const password = request.body.password;
+  if (firstName.length == 0 || email.length == 0 || password.length == 0) {
+    console.log("Credentials Empty!");
+    request.flash("error", `Missing Credentials`);
+    response.redirect("/signup");
+  } else {
+    const hashedPassword = await bcrypt.hash(request.body.password, saltRounds);
+    try {
+      const user = await User.create({
+        firstName: firstName,
+        lastName: request.body.lastName,
+        email: email,
+        password: hashedPassword,
+      });
+
+      request.login(user, (err) => {
+        if (err) {
+          console.error(err);
+        }
+        response.redirect("/todo");
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 });
 
