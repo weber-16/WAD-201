@@ -40,9 +40,14 @@ passport.use(
       passwordField: "password",
     },
     (username, password, done) => {
-      User.findOne({ where: { email: username, password: password } })
-        .then((user) => {
-          return done(null, user);
+      User.findOne({ where: { email: username } })
+        .then(async (user) => {
+          const result = await bcrypt.compare(password, user.password);
+          if (result) {
+            return done(null, user);
+          } else {
+            return done("Invalid password");
+          }
         })
         .catch((error) => {
           return done(error);
@@ -70,10 +75,27 @@ app.get("/signup", (request, response) => {
   response.render("signup", { csrfToken: request.csrfToken() });
 });
 
+app.get("/login", (request, response) => {
+  response.render("login", { csrfToken: request.csrfToken() });
+});
+
+app.get("/signout", (request, response, next) => {
+  // signout 
+  request.logout((err) => {
+    if (err) { return next(err); }
+    response.redirect("/");
+  })
+})
+
+app.post("/session", passport.authenticate('local', {failureRedirect: "/login"}), (request, response) => {
+  console.log(request.user);
+  response.redirect("/todo");
+})
+
 app.post("/users", async (request, response) => {
   // hashing a password using bcrypt
-  const hashedPwd = await bcrypt.hash(request.body.password, saltRounds)
-  console.log(hashedPwd)
+  const hashedPwd = await bcrypt.hash(request.body.password, saltRounds);
+  console.log(hashedPwd);
   // Have to create user here.
   try {
     const user = await User.create({
@@ -84,10 +106,10 @@ app.post("/users", async (request, response) => {
     });
     request.login(user, (err) => {
       if (err) {
-        console.log(err)
+        console.log(err);
       }
       response.redirect("/todo");
-    })
+    });
   } catch (error) {
     console.log(error);
   }
@@ -99,32 +121,37 @@ app.get("/", async (request, response) => {
   });
 });
 
-app.get("/todo", connectEnsureLogin.ensureLoggedIn(), async (request, response) => { //
-  const allTodos = await Todo.getTodos();
-  const overdue = await Todo.overDue();
-  const duetoday = await Todo.dueToday();
-  const duelater = await Todo.dueLater();
-  const completeditems = await Todo.completed();
+app.get(
+  "/todo",
+  connectEnsureLogin.ensureLoggedIn(),
+  async (request, response) => {
+    //
+    const allTodos = await Todo.getTodos();
+    const overdue = await Todo.overDue();
+    const duetoday = await Todo.dueToday();
+    const duelater = await Todo.dueLater();
+    const completeditems = await Todo.completed();
 
-  if (request.accepts("html")) {
-    response.render("todo", {
-      allTodos,
-      overdue,
-      duetoday,
-      duelater,
-      completeditems,
-      csrfToken: request.csrfToken(),
-    });
-  } else {
-    response.json({
-      allTodos,
-      overdue,
-      duetoday,
-      duelater,
-      completeditems,
-    });
+    if (request.accepts("html")) {
+      response.render("todo", {
+        allTodos,
+        overdue,
+        duetoday,
+        duelater,
+        completeditems,
+        csrfToken: request.csrfToken(),
+      });
+    } else {
+      response.json({
+        allTodos,
+        overdue,
+        duetoday,
+        duelater,
+        completeditems,
+      });
+    }
   }
-});
+);
 
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -160,7 +187,7 @@ app.get("/todos", async (request, response) => {
   }
 });
 
-app.post("/todos", async (request, response) => {
+app.post("/todos", connectEnsureLogin.ensureLoggedIn(), async (request, response) => {
   console.log("Generating a todo", request.body);
   try {
     const todo = await Todo.addTodo({
@@ -175,7 +202,7 @@ app.post("/todos", async (request, response) => {
   }
 });
 
-app.put("/todos/:id", async (request, response) => {
+app.put("/todos/:id", connectEnsureLogin.ensureLoggedIn(), async (request, response) => {
   console.log("We have to Update todo with ID: ", request.params.id);
   const todo = await Todo.findByPk(request.params.id);
   try {
@@ -187,7 +214,7 @@ app.put("/todos/:id", async (request, response) => {
   }
 });
 
-app.delete("/todos/:id", async (request, response) => {
+app.delete("/todos/:id", connectEnsureLogin.ensureLoggedIn(), async (request, response) => {
   app.get("/");
   console.log("Delete a todo by ID: ", request.params.id);
   try {
