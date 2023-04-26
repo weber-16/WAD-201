@@ -3,7 +3,7 @@ const request = require("supertest");
 const db = require("../models/index");
 const app = require("../app");
 var cheerio = require("cheerio");
-const csrf = require("csrf");
+// const csrf = require("csrf");
 
 let server, agent;
 function extractCsrfToken(res) {
@@ -44,11 +44,11 @@ describe("Todo Application", function () {
     const csrfToken = extractCsrfToken(res);
     const response = await agent.post("/todos").send({
       title: "Buy milk",
-      dueDate: new Date().toISOString(),
+      dueDate: new Date().toISOString().substring(0,10),
       completed: false,
       _csrf: csrfToken,
     });
-    expect(response.statusCode).toBe(500);
+    expect(response.statusCode).toBe(403);
   });
 
   test("Sign up", async () => {
@@ -80,7 +80,7 @@ describe("Todo Application", function () {
     let csrfToken = extractCsrfToken(res);
     await agent.post("/todos").send({
       title: "Buy milk",
-      dueDate: new Date().toISOString(),
+      dueDate: new Date().toISOString().substring(0,10),
       completed: false,
       _csrf: csrfToken,
     });
@@ -106,7 +106,7 @@ describe("Todo Application", function () {
     let csrfToken = extractCsrfToken(res);
     await agent.post("/todos").send({
       title: "Buy milk",
-      dueDate: new Date().toISOString(),
+      dueDate: new Date().toISOString().substring(0,10),
       completed: true,
       _csrf: csrfToken,
     });
@@ -133,7 +133,7 @@ describe("Todo Application", function () {
 
     await agent.post("/todos").send({
       title: "Buy milk",
-      dueDate: new Date().toISOString(),
+      dueDate: new Date().toISOString().substring(0,10),
       completed: false, //
       _csrf: csrfToken,
     });
@@ -150,8 +150,8 @@ describe("Todo Application", function () {
       .delete(`/todos/${latestTodo.id}`)
       .send({ _csrf: csrfToken });
     const parsedDeletedResponse = JSON.parse(deletedResponse.text);
-    //expect(parsedDeletedResponse.success).toBe(true);
-    expect(deletedResponse.statusCode).toBe(422);
+    expect(parsedDeletedResponse.success).toBe(true);
+    expect(deletedResponse.statusCode).toBe(200);
   }); 
 })
  
